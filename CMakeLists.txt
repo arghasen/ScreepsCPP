@@ -15,9 +15,16 @@ add_subdirectory(third/screepsxx)
 # If you change TARGET_NAME, please, make corresponding changes in main.js.
 set(TARGET_NAME app)
 
-add_executable(${TARGET_NAME} src/main.cpp src/bootloader.cpp )
+add_executable(${TARGET_NAME} 
+                    src/main.cpp
+                    src/bootloader.cpp
+                    src/os/kernel.cpp
+                    src/os/scheduler.cpp
+                )
+                
 target_link_libraries(${TARGET_NAME} screepsxx)
 target_link_options(${TARGET_NAME} PUBLIC -sMODULARIZE=1 --no-entry --bind)
+
 
 # Collect all artifacts in 'dist' directory
 # WASM-module and corresponding JS-module must have different base names in order to use them in Screeps, so we add suffixes.

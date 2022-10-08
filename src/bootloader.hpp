@@ -1,12 +1,16 @@
 #pragma once
+#include "utils/nocopyormove.hpp"
+
+#include "os/kernel.hpp"
+#include "os/scheduler.hpp"
 
 namespace slowdeath
 {
-    class Bootloader
+    class Bootloader :public utils::NoCopyorMove
     {
     public:
         Bootloader();
-        ~Bootloader();
+        ~Bootloader() override;
         Bootloader(const Bootloader &s) = delete;
         Bootloader &operator=(const Bootloader &s) = delete;
         Bootloader(Bootloader &&s) = delete;
@@ -14,7 +18,7 @@ namespace slowdeath
         void run();
 
     private:
-        Kernel kernel;
-        Scheduler scheduler;
+        os::Kernel kernel;
+        os::Scheduler scheduler;
     };
 }

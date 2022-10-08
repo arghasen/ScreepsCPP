@@ -19,6 +19,5 @@ slowdeath::Bootloader::~Bootloader()
 void slowdeath::Bootloader::run()
 {
     std::cout << "Launching Operating System" << std::endl;
-    kernel.run();
-    scheduler.run();
+    kernel.init();
 }
