@@ -3,21 +3,20 @@
 #include <Screeps/Context.hpp>
 #include <Screeps/Creep.hpp>
 
-#include <iostream>
-
 slowdeath::Bootloader::Bootloader()
 {
     Screeps::Context::update();
-    std::cout << "hi hi !!!" << Screeps::Game.cpuGetUsed() << std::endl;
+    JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
 }
 
 slowdeath::Bootloader::~Bootloader()
 {
-    std::cout << "End of tick:" << Screeps::Game.cpuGetUsed() << std::endl;
+    std::string a = "End of Tick:";
+    JS::console.log(a, Screeps::Game.cpuGetUsed());
 }
 
 void slowdeath::Bootloader::run()
 {
-    std::cout << "Launching Operating System" << std::endl;
+    JS::console.log(std::string("Launching Operating System"));
     kernel.init();
 }

@@ -10,6 +10,8 @@ namespace os
         public:
         Scheduler() = default;
         ~Scheduler() override = default;
+
+        void schedule();
     };
 } // namespace os
 } // namespace slowdeath

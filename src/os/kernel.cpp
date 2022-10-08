@@ -2,16 +2,17 @@
 
 #include <Screeps/JSON.hpp>
 #include <Screeps/Memory.hpp>
-
-#include <iostream>
+#include <string>
 
 void slowdeath::os::Kernel::init()
 {
-    std::cout << "Kernel initialization" << std::endl;
+    JS::console.log(std::string("Kernel Initalization"));
 
     if (Screeps::Memory.value()["os"].isUndefined())
     {
-        std::cout << "Memory is unallocated for os" << std::endl;
+        JS::console.log(std::string("Memory is unallocated for os"));
         Screeps::Memory.set("os", JSON::value_t::object); // creates an empty memory segment.
     }
+
+    scheduler.schedule();
 }
