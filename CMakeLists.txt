@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(example CXX)
+project(screepsAI CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
@@ -15,7 +15,7 @@ add_subdirectory(third/screepsxx)
 # If you change TARGET_NAME, please, make corresponding changes in main.js.
 set(TARGET_NAME app)
 
-add_executable(${TARGET_NAME} src/main.cpp)
+add_executable(${TARGET_NAME} src/main.cpp src/bootloader.cpp )
 target_link_libraries(${TARGET_NAME} screepsxx)
 target_link_options(${TARGET_NAME} PUBLIC -sMODULARIZE=1 --no-entry --bind)
 
@@ -31,5 +31,5 @@ add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E 
 # set SCREEPS_TOKEN environment variable to your Screeps API token
 # (https://docs.screeps.com/auth-tokens.html).
 # If you don't want to use this script, please, remove following lines.
-find_package(Python COMPONENTS Interpreter REQUIRED)
-add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND ${Python_EXECUTABLE} ${screepsxx_SOURCE_DIR}/tools/upload.py ${CMAKE_SOURCE_DIR}/dist $ENV{SCREEPS_TOKEN})
+# find_package(Python COMPONENTS Interpreter REQUIRED)
+# add_custom_command(TARGET ${TARGET_NAME} POST_BUILD COMMAND ${Python_EXECUTABLE} ${screepsxx_SOURCE_DIR}/tools/upload.py ${CMAKE_SOURCE_DIR}/dist $ENV{SCREEPS_TOKEN})
