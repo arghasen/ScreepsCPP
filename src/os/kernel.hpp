@@ -1,6 +1,8 @@
 #pragma once
 
 #include "../utils/nocopyormove.hpp"
+#include "scheduler.hpp"
+
 
 namespace slowdeath{
 namespace os
@@ -11,6 +13,9 @@ namespace os
         Kernel() = default;
         ~Kernel() override = default;
         void init();
+
+    private:
+        Scheduler scheduler;
     };
 } // namespace os
 } // namespace slowdeath

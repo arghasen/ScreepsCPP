@@ -20,7 +20,7 @@ add_executable(${TARGET_NAME}
                     src/bootloader.cpp
                     src/os/kernel.cpp
                     src/os/scheduler.cpp
-                )
+        src/os/process.cpp src/os/process.hpp)
                 
 target_link_libraries(${TARGET_NAME} screepsxx)
 target_link_options(${TARGET_NAME} PUBLIC -sMODULARIZE=1 --no-entry --bind)

@@ -4,3 +4,5 @@ dist/
 compile_commands.json
 -sSTRICT=0/
 .vscode/
+.idea/
+cmake-build-debug/
