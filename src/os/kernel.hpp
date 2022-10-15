@@ -7,6 +7,9 @@
 namespace slowdeath{
 namespace os
 {
+    /**
+     * Kernel holds the OS together and is responsible for its functioning
+     */
     class Kernel : public utils::NoCopyorMove
     {
         public:
@@ -14,6 +17,7 @@ namespace os
         ~Kernel() override = default;
         void init();
         void run();
+        void shutdown();
     private:
         Scheduler scheduler;
 

@@ -19,4 +19,6 @@ void slowdeath::Bootloader::run()
 {
     JS::console.log(std::string("Launching Operating System"));
     kernel.init();
+    kernel.run();
+    kernel.shutdown();
 }

@@ -5,10 +5,14 @@
 
 namespace slowdeath
 {
+    /**
+     * A basic bootloader for starting and stopping the kernel.
+     */
     class Bootloader :public utils::NoCopyorMove
     {
     public:
         Bootloader();
+
         ~Bootloader() override;
 
         void run();

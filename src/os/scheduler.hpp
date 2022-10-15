@@ -6,6 +6,9 @@
 namespace slowdeath{
 namespace os
 {
+    /**
+     * An extremely basic scheduler, runs jobs in FCFS order.
+     */
     class Scheduler :public utils::NoCopyorMove
     {
         public:

@@ -38,7 +38,7 @@ void slowdeath::os::Kernel::run()
         auto currentProcessPid = scheduler.getNextPid();
         if(currentProcessPid == os::NO_PID)
         {
-            JS::console.log(std::string("exiting kernel as no PId left to run"));
+            JS::console.log(std::string("suspending kernel as no PId left to run"));
             return;
         }
         else
@@ -54,7 +54,11 @@ void slowdeath::os::Kernel::run()
             }
         }
     }
-
+    void shutdown() {
+            auto processCount = scheduler.getProcessCount();
+            auto completedCount = scheduler.getCompletedProcessCount();
+            JS::console.log(std::string("Processes Run:") + completedCount/processCount);
+    }
 }
 void slowdeath::os::Kernel::basicCreep() const {
     auto spawns = Screeps::Game.spawns();
