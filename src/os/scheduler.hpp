@@ -12,6 +12,8 @@ namespace os
         ~Scheduler() override = default;
 
         void schedule();
+
+        int getTotalJobs();
     };
 } // namespace os
 } // namespace slowdeath
