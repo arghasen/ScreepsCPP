@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../utils/nocopyormove.hpp"
+#include "process.hpp"
 
 namespace slowdeath{
 namespace os
@@ -14,6 +15,12 @@ namespace os
         void schedule();
 
         int getTotalJobs();
+
+        void reschedule();
+
+        PId getNextPid();
+
+        Process* getProcessForPid(PId i);
     };
 } // namespace os
 } // namespace slowdeath

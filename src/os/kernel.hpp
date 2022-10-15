@@ -13,9 +13,13 @@ namespace os
         Kernel() = default;
         ~Kernel() override = default;
         void init();
-
+        void run();
     private:
         Scheduler scheduler;
+
+        void basicCreep() const;
+
+        bool canContinueRunning();
     };
 } // namespace os
 } // namespace slowdeath
