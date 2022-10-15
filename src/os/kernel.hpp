@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../utils/nocopyormove.hpp"
+#include "../usr/basic_bot.hpp"
 #include "scheduler.hpp"
 
 
@@ -20,8 +21,6 @@ namespace os
         void shutdown();
     private:
         Scheduler scheduler;
-
-        void basicCreep() const;
 
         bool canContinueRunning();
     };

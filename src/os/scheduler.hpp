@@ -24,6 +24,10 @@ namespace os
         PId getNextPid();
 
         Process* getProcessForPid(PId i);
+
+        uint16_t getProcessCount();
+
+        uint16_t getCompletedProcessCount();
     };
 } // namespace os
 } // namespace slowdeath
