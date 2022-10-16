@@ -7,17 +7,22 @@
 void slowdeath::os::Kernel::init() {
     JS::console.log(JS::Value("Kernel Initalization"));
 
-    if (Screeps::Memory.value()["os"].isUndefined()) {
-        JS::console.log(std::string("Memory is unallocated for os"));
-        Screeps::Memory.set("os", JSON::object()); // creates an empty memory segment.
-        Screeps::Memory.set("stats", JSON::object());
-    }
+    initializeMemory();
 
     scheduler.schedule();
     if (scheduler.getTotalJobs() == 0) {
         basicCreep();
     }
 }
+
+void slowdeath::os::Kernel::initializeMemory() const {
+    if (Screeps::Memory.value()["os"].isUndefined()) {
+        JS::console.log(std::string("Memory is unallocated for os"));
+        Screeps::Memory.set("os", JSON::object()); // creates an empty memory segment.
+        Screeps::Memory.set("stats", JSON::object());
+    }
+}
+
 void slowdeath::os::Kernel::run()
 {
     scheduler.reschedule();
@@ -31,18 +36,22 @@ void slowdeath::os::Kernel::run()
         }
         else
         {
-            JS::console.log(std::string("Kernel: running pid: "+ currentProcessPid));
-            auto process = scheduler.getProcessForPid(currentProcessPid);
-            try{
-                process->main();
-            }
-            catch(std::exception& e)
-            {
-                JS::console.log(std::string ("errorType:")+e.what() );
-            }
+            runProcess(currentProcessPid);
         }
     }
 
+}
+
+void slowdeath::os::Kernel::runProcess(unsigned short currentProcessPid) {
+    JS::console.log(std::string("Kernel: running pid: " + currentProcessPid));
+    auto process = scheduler.getProcessForPid(currentProcessPid);
+    try{
+        process->main();
+    }
+    catch(std::exception& e)
+    {
+        JS::console.log(std::string ("errorType:")+e.what() );
+    }
 }
 
 void slowdeath::os::Kernel::shutdown() {

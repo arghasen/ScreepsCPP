@@ -20,5 +20,9 @@ namespace slowdeath
     private:
         os::Kernel kernel;
         std::string version;
+
+        void setEpoch() const;
+
+        void setOSVersion() const;
     };
 }

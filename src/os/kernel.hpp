@@ -16,13 +16,27 @@ namespace os
         public:
         Kernel() = default;
         ~Kernel() override = default;
+        /**
+         * Initializiation routing of the kernel
+         */
         void init();
+        /**
+         * The run routine ensures the whole system runs correctly
+         */
         void run();
+
+        /**
+         * Cleanup and prepare for next tick
+         */
         void shutdown();
     private:
         Scheduler scheduler;
 
         bool canContinueRunning();
+
+        void initializeMemory() const;
+
+        void runProcess(unsigned short currentProcessPid);
     };
 } // namespace os
 } // namespace slowdeath
