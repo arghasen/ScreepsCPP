@@ -36,7 +36,7 @@ namespace os
         /**
          * get the process for the given pid
          * @param i
-         * @return
+         * @return A pointer to the process
          */
         Process* getProcessForPid(PId i);
 

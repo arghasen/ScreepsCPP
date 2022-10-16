@@ -17,7 +17,7 @@ namespace os
         Kernel() = default;
         ~Kernel() override = default;
         /**
-         * Initializiation routing of the kernel
+         * Initialization routing of the kernel
          */
         void init();
         /**

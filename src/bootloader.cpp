@@ -6,20 +6,20 @@
 slowdeath::Bootloader::Bootloader()
 {
     Screeps::Context::update();
+    JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
     setEpoch();
     setOSVersion();
-    JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
 }
 
 void slowdeath::Bootloader::setOSVersion() const {
-    if(Screeps::Memory["version"].empty())
+    if(Screeps::Memory.isUndefined("version"))
     {
         Screeps::Memory.set("epoch", JSON(version));
     }
 }
 
 void slowdeath::Bootloader::setEpoch() const {
-    if(Screeps::Memory["epoch"].empty())
+    if(Screeps::Memory.isUndefined("epoch"))
     {
         Screeps::Memory.set("epoch", JSON(Screeps::Game.time()));
     }
