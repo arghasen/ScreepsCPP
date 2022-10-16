@@ -11,7 +11,7 @@ namespace os
     /**
      * Kernel holds the OS together and is responsible for its functioning
      */
-    class Kernel : public utils::NoCopyorMove
+class Kernel : public utils::NoCopyorMove
     {
         public:
         Kernel() = default;

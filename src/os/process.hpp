@@ -20,7 +20,11 @@ namespace slowdeath {
 
             ~Process() = default;
 
+            virtual void init();
+
             virtual int main() = 0;
+
+            virtual void shutdown();
 
             std::string name;
         };

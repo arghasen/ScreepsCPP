@@ -8,7 +8,7 @@ void slowdeath::os::Kernel::init() {
     JS::console.log(JS::Value("Kernel Initalization"));
 
     initializeMemory();
-
+    scheduler.init(Screeps::Memory["scheduler"]);
     scheduler.schedule();
     if (scheduler.getTotalJobs() == 0) {
         basicCreep();
@@ -18,7 +18,21 @@ void slowdeath::os::Kernel::init() {
 void slowdeath::os::Kernel::initializeMemory() const {
     if (Screeps::Memory.isUndefined("os")) {
         JS::console.log(std::string("Memory is unallocated for os"));
-        Screeps::Memory.set("os", JSON::object()); // creates an empty memory segment.
+
+        JSON processes = JSON::object();
+        processes["running"] = false;
+        processes["ready"] = JSON::array();
+        processes["sleeping"] = JSON::array();
+        processes["completed"] = JSON::array();
+        processes["waiting"] = JSON::array();
+        processes["count"] = 0;
+        processes["index"] = JSON::object();
+
+        JSON j;
+        j["scheduler"] = JSON::object();
+        j["scheduler"]["processes"] =processes;
+
+        Screeps::Memory.set("os", j);
         Screeps::Memory.set("stats", JSON::object());
     }
 }
@@ -56,6 +70,7 @@ void slowdeath::os::Kernel::runProcess(slowdeath::os::PId currentProcessPid) {
 void slowdeath::os::Kernel::shutdown() {
     auto processCount = scheduler.getProcessCount();
     auto completedCount = scheduler.getCompletedProcessCount();
+    Screeps::Memory.set("scheduler", scheduler.getMemory());
     JS::console.log(std::string("Processes Run format: "),completedCount, processCount);
 }
 

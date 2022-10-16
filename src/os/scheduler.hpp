@@ -3,9 +3,16 @@
 #include "../utils/nocopyormove.hpp"
 #include "process.hpp"
 
+#include <Screeps/JS.hpp> // Review these inclusion
+#include <Screeps/JSON.hpp>
+
 namespace slowdeath{
 namespace os
 {
+    // Reserved for future use with newer version of JSON lib
+    constexpr std::string_view processes = "processes";
+
+    constexpr std::string_view ready = "ready";
     /**
      * An extremely basic scheduler, runs jobs in FCFS order.
      */
@@ -43,6 +50,16 @@ namespace os
         uint16_t getProcessCount();
 
         uint16_t getCompletedProcessCount();
+
+        void init(JSON memory);
+
+        JSON getMemory();
+    private:
+        JSON memory_;
+
+        void completeCurrentProcess();
+
+        PId getRunningProcess();
     };
 } // namespace os
 } // namespace slowdeath
