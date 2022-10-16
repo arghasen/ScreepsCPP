@@ -14,7 +14,7 @@ slowdeath::Bootloader::Bootloader()
 void slowdeath::Bootloader::setOSVersion() const {
     if(Screeps::Memory.isUndefined("version"))
     {
-        Screeps::Memory.set("epoch", JSON(version));
+        Screeps::Memory.set("version", JSON(version));
     }
 }
 

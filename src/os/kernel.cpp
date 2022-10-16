@@ -39,11 +39,10 @@ void slowdeath::os::Kernel::run()
             runProcess(currentProcessPid);
         }
     }
-
 }
 
-void slowdeath::os::Kernel::runProcess(unsigned short currentProcessPid) {
-    JS::console.log(std::string("Kernel: running pid: " + currentProcessPid));
+void slowdeath::os::Kernel::runProcess(slowdeath::os::PId currentProcessPid) {
+    JS::console.log(std::string("Kernel: running pid: ") , currentProcessPid);
     auto process = scheduler.getProcessForPid(currentProcessPid);
     try{
         process->main();
@@ -57,7 +56,7 @@ void slowdeath::os::Kernel::runProcess(unsigned short currentProcessPid) {
 void slowdeath::os::Kernel::shutdown() {
     auto processCount = scheduler.getProcessCount();
     auto completedCount = scheduler.getCompletedProcessCount();
-    JS::console.log(std::string("Processes Run:") + std::to_string(completedCount/processCount));
+    JS::console.log(std::string("Processes Run format: "),completedCount, processCount);
 }
 
 bool slowdeath::os::Kernel::canContinueRunning() {

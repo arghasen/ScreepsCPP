@@ -17,7 +17,7 @@ inline void basicCreep()  {
     if(Screeps::Game.creeps().empty())
     {
         auto res = sp1.spawnCreep({Screeps::WORK,Screeps::CARRY, Screeps::MOVE}, "creep1");
-        JS::console.log(std::string("creating a creep"+ res) );
+        JS::console.log(std::string("creating a creep: "), res );
     }
     else
     {
