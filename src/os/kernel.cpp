@@ -9,8 +9,8 @@ void slowdeath::os::Kernel::init() {
 
     if (Screeps::Memory.value()["os"].isUndefined()) {
         JS::console.log(std::string("Memory is unallocated for os"));
-        Screeps::Memory.set("os", JSON::value_t::object); // creates an empty memory segment.
-        Screeps::Memory.set("stats", JSON::value_t::object);
+        Screeps::Memory.set("os", JSON::object()); // creates an empty memory segment.
+        Screeps::Memory.set("stats", JSON::object());
     }
 
     scheduler.schedule();

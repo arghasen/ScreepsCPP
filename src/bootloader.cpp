@@ -6,6 +6,14 @@
 slowdeath::Bootloader::Bootloader()
 {
     Screeps::Context::update();
+    if(Screeps::Memory["epoch"].empty())
+    {
+        Screeps::Memory.set("epoch", JSON(Screeps::Game.time()));
+    }
+    if(Screeps::Memory["version"].empty())
+    {
+        Screeps::Memory.set("epoch", JSON(version));
+    }
     JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
 }
 

@@ -19,5 +19,6 @@ namespace slowdeath
 
     private:
         os::Kernel kernel;
+        std::string version;
     };
 }
