@@ -11,17 +11,18 @@ add_compile_options(${COMPILE_FLAGS})
 add_link_options(${COMPILE_FLAGS} ${LINK_FLAGS})
 
 add_subdirectory(third/screepsxx)
+add_subdirectory(third/googletest)
 
 # If you change TARGET_NAME, please, make corresponding changes in main.js.
 set(TARGET_NAME app)
 
 add_executable(${TARGET_NAME}
         src/init.cpp
-                    src/bootloader.cpp
-                    src/os/kernel.cpp
-                    src/os/scheduler.cpp
-                    src/os/process.cpp
-        src/usr/basic_bot.hpp)
+        src/bootloader.cpp
+        src/os/kernel.cpp
+        src/os/scheduler.cpp
+        src/os/process.cpp
+        src/os/ProcessRegistry.cpp )
                 
 target_link_libraries(${TARGET_NAME} screepsxx)
 target_link_options(${TARGET_NAME} PUBLIC -sMODULARIZE=1 --no-entry --bind)

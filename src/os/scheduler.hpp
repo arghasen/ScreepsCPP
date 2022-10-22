@@ -47,13 +47,38 @@ namespace os
          */
         Process* getProcessForPid(PId i);
 
+        /**
+         * Gets the number of processes in the scheduler
+         * @return the count
+         */
         uint16_t getProcessCount();
 
+        /**
+         * Gets the number of completed processes since last reschedule
+         * @return the count
+         */
         uint16_t getCompletedProcessCount();
 
+        /**
+         * Initializes the scheduler with the memory contents.
+         * @param memory JSON object holding the memory from previous run
+         */
         void init(JSON memory);
 
+        /**
+         * Gets the current memory of the Scheduler to persist between ticks
+         * @return JSON memory contents
+         */
         JSON getMemory();
+
+        /**
+         * Launches a process
+         * @param name process name
+         * @param data process data(can be empty)
+         * @param parent process parent(can be null)
+         * @return Pid of the launched process
+         */
+        PId launch(std::string_view name, ProcessData data, Process* parent = nullptr);
     private:
         JSON memory_;
 
