@@ -19,7 +19,8 @@ namespace slowdeath
 
     private:
         os::Kernel kernel;
-        std::string version;
+        std::string version="v1";
+        JSON memory;
 
         void setEpoch() const;
 

@@ -18,8 +18,9 @@ class Kernel : public utils::NoCopyorMove
         ~Kernel() override = default;
         /**
          * Initialization routing of the kernel
+         * @param memory JSON object representing the memory of previous tick
          */
-        void init();
+        void init(JSON memory);
         /**
          * The run routine ensures the whole system runs correctly
          */
@@ -31,12 +32,15 @@ class Kernel : public utils::NoCopyorMove
         void shutdown();
     private:
         Scheduler scheduler;
+        JSON memory_;
 
         bool canContinueRunning();
 
         void initializeMemory() const;
 
         void runProcess(unsigned short currentProcessPid);
-    };
+
+    void cleanupMemory();
+};
 } // namespace os
 } // namespace slowdeath

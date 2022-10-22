@@ -9,6 +9,7 @@ slowdeath::Bootloader::Bootloader()
     JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
     setEpoch();
     setOSVersion();
+    memory = JS::toJSON(Screeps::Memory.value());
 }
 
 void slowdeath::Bootloader::setOSVersion() const {
@@ -34,7 +35,7 @@ slowdeath::Bootloader::~Bootloader()
 void slowdeath::Bootloader::run()
 {
     JS::console.log(std::string("Launching Operating System"));
-    kernel.init();
+    kernel.init(memory);
     kernel.run();
     kernel.shutdown();
 }

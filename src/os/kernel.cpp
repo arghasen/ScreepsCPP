@@ -4,11 +4,12 @@
 #include <Screeps/Memory.hpp>
 #include <string>
 
-void slowdeath::os::Kernel::init() {
+void slowdeath::os::Kernel::init(JSON memory) {
     JS::console.log(JS::Value("Kernel Initalization"));
-
+    memory_ = std::move(memory);
+    JS::console.log(std::string("memory:"),memory_.dump());
     initializeMemory();
-    scheduler.init(Screeps::Memory["scheduler"]);
+    scheduler.init(memory_["os"]["scheduler"]);
     scheduler.schedule();
     if (scheduler.getTotalJobs() == 0) {
         basicCreep();
@@ -72,8 +73,14 @@ void slowdeath::os::Kernel::shutdown() {
     auto completedCount = scheduler.getCompletedProcessCount();
     Screeps::Memory.set("scheduler", scheduler.getMemory());
     JS::console.log(std::string("Processes Run format: "),completedCount, processCount);
+    cleanupMemory();
+    //Screeps::Memory.set()
 }
 
 bool slowdeath::os::Kernel::canContinueRunning() {
     return true;
+}
+
+void slowdeath::os::Kernel::cleanupMemory() {
+
 }
