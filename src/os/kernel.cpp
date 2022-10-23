@@ -4,10 +4,11 @@
 #include <Screeps/Memory.hpp>
 #include <string>
 
-void slowdeath::os::Kernel::init(JSON memory) {
+void slowdeath::os::Kernel::init(JSON memory)
+{
     JS::console.log(JS::Value("Kernel Initalization"));
     memory_ = std::move(memory);
-    JS::console.log(std::string("memory:"),memory_.dump());
+    JS::console.log(std::string("memory:"), memory_.dump());
     initializeMemory();
     scheduler.init(memory_["os"]["scheduler"]);
     scheduler.schedule();
@@ -16,7 +17,8 @@ void slowdeath::os::Kernel::init(JSON memory) {
     }
 }
 
-void slowdeath::os::Kernel::initializeMemory() const {
+void slowdeath::os::Kernel::initializeMemory() const
+{
     if (Screeps::Memory.isUndefined("os")) {
         JS::console.log(std::string("Memory is unallocated for os"));
 
@@ -31,7 +33,7 @@ void slowdeath::os::Kernel::initializeMemory() const {
 
         JSON j;
         j["scheduler"] = JSON::object();
-        j["scheduler"]["processes"] =processes;
+        j["scheduler"]["processes"] = processes;
 
         Screeps::Memory.set("os", j);
         Screeps::Memory.set("stats", JSON::object());
@@ -41,46 +43,45 @@ void slowdeath::os::Kernel::initializeMemory() const {
 void slowdeath::os::Kernel::run()
 {
     scheduler.reschedule();
-    while(canContinueRunning())
-    {
+    while (canContinueRunning()) {
         auto currentProcessPid = scheduler.getNextPid();
-        if(currentProcessPid == os::NO_PID)
-        {
+        if (currentProcessPid == os::NO_PID) {
             JS::console.log(std::string("suspending kernel as no PId left to run"));
             return;
-        }
-        else
-        {
+        } else {
             runProcess(currentProcessPid);
         }
     }
 }
 
-void slowdeath::os::Kernel::runProcess(slowdeath::os::PId currentProcessPid) {
-    JS::console.log(std::string("Kernel: running pid: ") , currentProcessPid);
+void slowdeath::os::Kernel::runProcess(slowdeath::os::PId currentProcessPid)
+{
+    JS::console.log(std::string("Kernel: running pid: "), currentProcessPid);
     auto process = scheduler.getProcessForPid(currentProcessPid);
-    try{
+    try {
         process->main();
     }
-    catch(std::exception& e)
-    {
-        JS::console.log(std::string ("errorType:")+e.what() );
+    catch (std::exception &e) {
+        JS::console.log(std::string("errorType:") + e.what());
     }
 }
 
-void slowdeath::os::Kernel::shutdown() {
+void slowdeath::os::Kernel::shutdown()
+{
     auto processCount = scheduler.getProcessCount();
     auto completedCount = scheduler.getCompletedProcessCount();
     Screeps::Memory.set("scheduler", scheduler.getMemory());
-    JS::console.log(std::string("Processes Run format: "),completedCount, processCount);
+    JS::console.log(std::string("Processes Run format: "), completedCount, processCount);
     cleanupMemory();
     //Screeps::Memory.set()
 }
 
-bool slowdeath::os::Kernel::canContinueRunning() {
+bool slowdeath::os::Kernel::canContinueRunning()
+{
     return true;
 }
 
-void slowdeath::os::Kernel::cleanupMemory() {
+void slowdeath::os::Kernel::cleanupMemory()
+{
 
 }

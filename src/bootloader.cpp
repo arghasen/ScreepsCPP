@@ -12,16 +12,16 @@ slowdeath::Bootloader::Bootloader()
     memory = JS::toJSON(Screeps::Memory.value());
 }
 
-void slowdeath::Bootloader::setOSVersion() const {
-    if(Screeps::Memory.isUndefined("version"))
-    {
+void slowdeath::Bootloader::setOSVersion() const
+{
+    if (Screeps::Memory.isUndefined("version")) {
         Screeps::Memory.set("version", JSON(version));
     }
 }
 
-void slowdeath::Bootloader::setEpoch() const {
-    if(Screeps::Memory.isUndefined("epoch"))
-    {
+void slowdeath::Bootloader::setEpoch() const
+{
+    if (Screeps::Memory.isUndefined("epoch")) {
         Screeps::Memory.set("epoch", JSON(Screeps::Game.time()));
     }
 }

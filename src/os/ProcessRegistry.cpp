@@ -1,6 +1,8 @@
 #include "ProcessRegistry.hpp"
 
-namespace slowdeath {
-    namespace os {
-    } // slowdeath
+namespace slowdeath
+{
+namespace os
+{
+} // slowdeath
 } // os

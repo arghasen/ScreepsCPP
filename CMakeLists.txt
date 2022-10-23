@@ -19,7 +19,6 @@ set(TARGET_NAME app)
 add_executable(${TARGET_NAME}
         src/init.cpp
         src/bootloader.cpp
-        src/os/kernel.cpp
         src/os/scheduler.cpp
         src/os/process.cpp
         src/os/ProcessRegistry.cpp )

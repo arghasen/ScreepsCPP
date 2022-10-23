@@ -1,7 +1,9 @@
 #pragma once
 #include <map>
-namespace slowdeath {
-namespace os {
+namespace slowdeath
+{
+namespace os
+{
 
 //class ProcessFactory{
 //    template<typename T>
@@ -10,7 +12,8 @@ namespace os {
 //    }
 //};
 class Creator;
-class ProcessRegistry {
+class ProcessRegistry
+{
     std::map<std::string, Creator> registry;
 };
 

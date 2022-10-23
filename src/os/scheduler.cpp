@@ -6,18 +6,21 @@ void slowdeath::os::Scheduler::schedule()
 {
 }
 
-int slowdeath::os::Scheduler::getTotalJobs() {
+int slowdeath::os::Scheduler::getTotalJobs()
+{
     return 0;
 }
 
-void slowdeath::os::Scheduler::reschedule() {
+void slowdeath::os::Scheduler::reschedule()
+{
 
 }
 
-slowdeath::os::PId slowdeath::os::Scheduler::getNextPid() {
+slowdeath::os::PId slowdeath::os::Scheduler::getNextPid()
+{
 
     completeCurrentProcess();
-    auto& readyQueue = memory_["processes"]["ready"];
+    auto &readyQueue = memory_["processes"]["ready"];
     if (readyQueue.empty()) {
         return NO_PID;
     }
@@ -34,7 +37,8 @@ slowdeath::os::PId slowdeath::os::Scheduler::getNextPid() {
     return NO_PID;
 }
 
-void slowdeath::os::Scheduler::completeCurrentProcess() {
+void slowdeath::os::Scheduler::completeCurrentProcess()
+{
     auto currentProcess = getRunningProcess();
     if (currentProcess) {
         memory_["processes"]["completed"].push_back(currentProcess);
@@ -42,25 +46,30 @@ void slowdeath::os::Scheduler::completeCurrentProcess() {
     }
 }
 
-slowdeath::os::PId slowdeath::os::Scheduler::getRunningProcess() { return memory_["processes"]["running"]; }
+slowdeath::os::PId slowdeath::os::Scheduler::getRunningProcess()
+{ return memory_["processes"]["running"]; }
 
-slowdeath::os::Process* slowdeath::os::Scheduler::getProcessForPid(slowdeath::os::PId i) {
+slowdeath::os::Process *slowdeath::os::Scheduler::getProcessForPid(slowdeath::os::PId i)
+{
     return nullptr;
 }
 
-uint16_t slowdeath::os::Scheduler::getProcessCount() {
+uint16_t slowdeath::os::Scheduler::getProcessCount()
+{
     return 0;
 }
 
-uint16_t slowdeath::os::Scheduler::getCompletedProcessCount() {
+uint16_t slowdeath::os::Scheduler::getCompletedProcessCount()
+{
     return 0;
 }
 
-void slowdeath::os::Scheduler::init(JSON memory) {
+void slowdeath::os::Scheduler::init(JSON memory)
+{
     memory_ = std::move(memory);
 }
 
-
-JSON slowdeath::os::Scheduler::getMemory() {
+JSON slowdeath::os::Scheduler::getMemory()
+{
     return memory_;
 }

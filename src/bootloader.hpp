@@ -5,25 +5,25 @@
 
 namespace slowdeath
 {
-    /**
-     * A basic bootloader for starting and stopping the kernel.
-     */
-    class Bootloader :public utils::NoCopyorMove
-    {
-    public:
-        Bootloader();
+/**
+ * A basic bootloader for starting and stopping the kernel.
+ */
+class Bootloader : public utils::NoCopyorMove
+{
+public:
+    Bootloader();
 
-        ~Bootloader() override;
+    ~Bootloader() override;
 
-        void run();
+    void run();
 
-    private:
-        os::Kernel kernel;
-        std::string version="v1";
-        JSON memory;
+private:
+    os::Kernel kernel;
+    std::string version = "v1";
+    JSON memory;
 
-        void setEpoch() const;
+    void setEpoch() const;
 
-        void setOSVersion() const;
-    };
+    void setOSVersion() const;
+};
 }
