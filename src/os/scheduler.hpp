@@ -80,6 +80,11 @@ public:
      * @return Pid of the launched process
      */
     PId launch(std::string_view name, ProcessData data, Process *parent = nullptr);
+    /**
+     *
+     * @return the JSON representation of the memory to initialize for scheduler
+     */
+    JSON initializeMemory() const;
 private:
     JSON memory_;
 

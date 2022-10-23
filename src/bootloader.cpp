@@ -1,28 +1,38 @@
 #include "bootloader.hpp"
 
 #include <Screeps/Context.hpp>
-#include <Screeps/Creep.hpp>
+constexpr auto versionKey="version";
+constexpr auto epochKey ="epoch";
 
 slowdeath::Bootloader::Bootloader()
 {
     Screeps::Context::update();
+    memory_ = JS::toJSON(Screeps::Memory.value());
     JS::console.log(std::string("hi hi !!!"), Screeps::Game.cpuGetUsed());
     setEpoch();
     setOSVersion();
-    memory = JS::toJSON(Screeps::Memory.value());
 }
 
 void slowdeath::Bootloader::setOSVersion() const
 {
-    if (Screeps::Memory.isUndefined("version")) {
-        Screeps::Memory.set("version", JSON(version));
+    if (!isSet(versionKey)|| getVersion() !=version_) {
+        Screeps::Memory.set(versionKey, JSON(version_));
     }
+}
+bool slowdeath::Bootloader::isSet(std::string key) const
+{
+    return memory_.contains(key);
+}
+
+std::string slowdeath::Bootloader::getVersion() const
+{
+    return memory_[versionKey].get<std::string>();
 }
 
 void slowdeath::Bootloader::setEpoch() const
 {
-    if (Screeps::Memory.isUndefined("epoch")) {
-        Screeps::Memory.set("epoch", JSON(Screeps::Game.time()));
+    if (isSet(epochKey)) {
+        Screeps::Memory.set(epochKey, JSON(Screeps::Game.time()));
     }
 }
 
@@ -35,7 +45,7 @@ slowdeath::Bootloader::~Bootloader()
 void slowdeath::Bootloader::run()
 {
     JS::console.log(std::string("Launching Operating System"));
-    kernel.init(memory);
-    kernel.run();
-    kernel.shutdown();
+    kernel_.init(memory_);
+    kernel_.run();
+    kernel_.shutdown();
 }

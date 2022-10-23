@@ -35,7 +35,7 @@ public:
     void shutdown();
 
 private:
-    Scheduler scheduler;
+    Scheduler scheduler_;
     JSON memory_;
 
     bool canContinueRunning();
